@@ -1,6 +1,6 @@
 # shopping
 
-A new Flutter project.
+Apps nativas robustas, escaláveis e idependentes de interface, com Flutter, BloC, Provider e Repository Pattern.
 
 ## Getting Started
 
