@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping/blocs/home.bloc.dart';
-import 'package:shopping/ui/shared/product/product-list.widget.dart';
+
 import 'package:shopping/ui/shared/widgets/category/category-list.widget.dart';
+
+import 'ui/shared/widgets/product/product-list.widget.dart';
 
 void main() {
   runApp(MyApp());
