@@ -21,7 +21,7 @@ class HomeBloc extends ChangeNotifier{
 
   getCategories() {
     categoryRepository.getAll().then((data) {
-      this.categories = data;
+      this.categories = data;      
       notifyListeners();
     });
   }
