@@ -16,13 +16,6 @@ class ProductPage extends StatelessWidget {
       builder: (context, snapshot) {
         ProductDetailsModel product = snapshot.data;
 
-        if (snapshot.data == null) {
-          return Center(
-            child: Container(
-              child: Text("Nenhum produto encontrado"),
-            ),
-          );
-        } else {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
               return Text('Aguardando...');
@@ -39,8 +32,7 @@ class ProductPage extends StatelessWidget {
                   ),
                 );
               return content(product);
-          }
-        }
+          }        
       },
     );
   }
