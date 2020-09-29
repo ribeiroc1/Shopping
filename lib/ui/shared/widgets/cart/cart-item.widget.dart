@@ -33,7 +33,7 @@ class CartItem extends StatelessWidget {
               left: 10,
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(item.title),
                 Text(
@@ -44,6 +44,46 @@ class CartItem extends StatelessWidget {
                 ),
                 SizedBox(
                   height: 10,
+                ),
+                Text("R\$ ${price.format((item.price * item.quantity))}"),
+                Container(
+                  height: 30,
+                  width: 120,
+                  decoration: BoxDecoration(
+                    color: Colors.black12,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 40,
+                        alignment: Alignment.center,
+                        child: FlatButton(
+                          child: Text("-"),
+                          onPressed: () {
+                            bloc.decrease(item);
+                          },
+                        ),
+                      ),
+                      Container(
+                        width: 40,
+                        alignment: Alignment.center,
+                        child: Text(item.quantity.toString()),
+                      ),
+                      Container(
+                        width: 40,
+                        alignment: Alignment.center,
+                        child: FlatButton(
+                          child: Text("+"),
+                          onPressed: () {
+                            bloc.increase(item);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

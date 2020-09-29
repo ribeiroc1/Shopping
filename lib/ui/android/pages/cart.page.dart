@@ -68,7 +68,7 @@ class CartPage extends StatelessWidget {
             bloc.remove(items[index]);
           },
           background: Container(
-            color: Colors.red.withOpacity(0.1),
+            color: Colors.red.withOpacity(0.1),            
           ),
         );
       },
