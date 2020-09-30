@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping/blocs/user.bloc.dart';
+import 'package:shopping/models/authenticate-user.model.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -6,17 +9,17 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  var bloc;
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   var username = '';
   var password = '';
   @override
   Widget build(BuildContext context) {
+    bloc = Provider.of<UserBloc>(context);
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-
-      ),
+      appBar: AppBar(),
       body: Padding(
         padding: EdgeInsets.all(20),
         child: Form(
@@ -37,13 +40,13 @@ class _LoginPageState extends State<LoginPage> {
                   fontSize: 20,
                   color: Theme.of(context).primaryColor,
                 ),
-                validator: (value){
-                  if(value.isEmpty){
+                validator: (value) {
+                  if (value.isEmpty) {
                     return 'Usuário Inválido';
                   }
                   return null;
                 },
-                onSaved: (val){
+                onSaved: (val) {
                   username = val;
                 },
               ),
@@ -65,22 +68,22 @@ class _LoginPageState extends State<LoginPage> {
                   fontSize: 20,
                   color: Theme.of(context).primaryColor,
                 ),
-                validator: (value){
-                  if(value.isEmpty){
+                validator: (value) {
+                  if (value.isEmpty) {
                     return 'Senha Inválida';
                   }
                   return null;
                 },
-                onSaved: (val){
+                onSaved: (val) {
                   password = val;
                 },
               ),
               FlatButton(
                 child: Text("Entrar"),
-                onPressed: (){
-                  if(_formKey.currentState.validate()){
+                onPressed: () {
+                  if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
-                    //authenticate(context);
+                    authenticate(context);
                   }
                 },
               ),
@@ -89,5 +92,23 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  authenticate(BuildContext context) async {   
+
+    var user = await bloc.authenticate(
+      new AuthenticateModel(
+        username: username,
+        password: password,
+      ),
+    );
+
+    if(user != null){
+      Navigator.pop(context);
+      return;
+    }
+
+    final snackBar = SnackBar(content: Text('Usuário ou senha invalidos'));
+    _scaffoldKey.currentState.showSnackBar(snackBar);
   }
 }
