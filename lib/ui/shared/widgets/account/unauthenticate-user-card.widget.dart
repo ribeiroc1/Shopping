@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:shopping/ui/android/pages/login.page.dart';
 import 'package:shopping/ui/android/pages/signup.page.dart';
